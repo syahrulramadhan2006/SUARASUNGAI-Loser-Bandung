@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meja Redaksi Jurnalis - Suara Sungai (Kec. Baleendah)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Palet Okabe-Ito Ramah Buta Warna & Tipografi Kontras Tinggi */
+    :root {
+      --bg-page: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --font-scale: 1;
+    }
+    html {
+      font-size: calc(17px * var(--font-scale));
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Atkinson Hyperlegible', 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    *:focus-visible {
+      outline: 4px solid #E69F00 !important;
+      outline-offset: 2px !important;
+    }
+    .btn-accessible {
+      min-height: 50px;
+      padding: 0.65rem 1.15rem;
+      border-width: 2.5px;
+      border-radius: 0.875rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 0.1s ease;
+      cursor: pointer;
+    }
+    .btn-accessible:active { transform: scale(0.98); }
+    .card-accessible {
+      background-color: var(--bg-card);
+      border: 2.5px solid #1E293B;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 0 rgba(15, 23, 42, 0.12);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- HEADER KHUSUS PLATFORM REDAKSI JURNALIS -->
+  <header class="bg-slate-950 text-white border-b-4 border-[#009E73] sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-[#009E73] border-2 border-white flex items-center justify-center text-white font-extrabold text-xl shrink-0">
+          📰
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">MEJA JURNALIS SUARA SUNGAI</h1>
+            <span class="px-2.5 py-0.5 text-xs font-extrabold uppercase bg-[#E69F00] text-slate-950 rounded-md">
+              Khusus Jurnalis
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300">Verifikasi Lapangan, Analisis Pola Desember & Sinkronisasi ke Portal Warga</p>
+        </div>
+      </div>
+
+      <!-- Kontrol Ukuran Huruf & Status Koneksi -->
+      <div class="flex items-center gap-2">
+        <span id="sync-status-pill" class="px-3 py-1.5 rounded-lg bg-emerald-950 border border-[#009E73] text-emerald-300 text-xs font-extrabold">
+          ● Terhubung ke Portal Warga
+        </span>
+        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-600" role="group" aria-label="Pengatur Ukuran Teks">
+          <button onclick="setFontScale(1)" id="font-btn-1" class="px-2.5 py-1 rounded-lg bg-[#009E73] text-white font-extrabold text-xs">A</button>
+          <button onclick="setFontScale(1.15)" id="font-btn-115" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 font-extrabold text-sm">A+</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Notifikasi Aksesibel (Pengganti alert()) -->
+  <div id="toast-banner" class="hidden fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-md z-50 bg-slate-950 text-white border-4 border-[#E69F00] rounded-2xl p-4 shadow-2xl" role="status" aria-live="polite">
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <p id="toast-title" class="font-extrabold text-base text-[#E69F00]">Notifikasi Redaksi</p>
+        <p id="toast-message" class="text-sm text-slate-100 mt-0.5"></p>
+      </div>
+      <button onclick="hideToast()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold border border-slate-500 shrink-0">Tutup</button>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA MEJA JURNALIS -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- 1. PANEL SINKRONISASI BACKEND APPS SCRIPT / PORTAL WARGA -->
+    <section class="card-accessible p-4 sm:p-5 bg-white">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg font-extrabold text-slate-950">Jembatan Data: Portal Warga</h2>
+          <p class="text-xs sm:text-sm text-slate-700 mt-0.5">
+            Setiap laporan dari <strong>Portal Warga</strong> otomatis masuk ke daftar di bawah. Hubungkan dengan Google Spreadsheet
+          </p>
+        </div>
+        <button onclick="syncFromSharedStorage(true)" class="btn-accessible bg-slate-900 hover:bg-slate-800 text-white border-slate-950 text-xs sm:text-sm shrink-0">
+          🔄 Tarik Laporan Warga Terbaru
+        </button>
+      </div>
+      <div class="mt-3 flex flex-col sm:flex-row gap-2">
+        <input type="url" id="apps-script-url-input" placeholder="Opsional: https://script.google.com/macros/s/.../exec" class="flex-1 min-h-[48px] px-3.5 rounded-xl border-2 border-slate-900 bg-slate-50 text-slate-950 text-sm font-medium" />
+        <button onclick="saveAppsScriptEndpoint()" class="btn-accessible bg-[#0072B2] text-white border-slate-950 text-sm shrink-0">Simpan & Hubungkan Backend</button>
+      </div>
+    </section>
+
+    <!-- 2. RINGKASAN STATISTIK KASUS & POLA -->
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4" id="journalist-stats-grid">
+      <!-- Dirender via JS -->
+    </section>
+
+    <!-- 3. PANEL ANALISIS POLA BULAN DESEMBER -->
+    <section class="card-accessible p-4 sm:p-6 bg-amber-50">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900 text-[#E69F00] text-xs font-extrabold uppercase tracking-wider mb-2">
+        📊 Deteksi Pola Kolektif — Bulan Desember
+      </div>
+      <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">Pola Berulang untuk Penelusuran Investigasi</h2>
+      <p class="text-sm text-slate-800 mt-1">
+        Sistem membaca seluruh laporan warga selama <strong>bulan Desember</strong> untuk mengenali kesamaan waktu dan lokasi. <em>Prinsip etik: pola ditampilkan sebagai petunjuk penelusuran jurnalis, bukan vonis atau bukti pembuangan sengaja.</em>
+      </p>
+      <div id="december-patterns-container" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Dirender via JS -->
+      </div>
+    </section>
+
+    <!-- 4. DAFTAR KASUS TERKUMPUL & KONTROL VERIFIKASI LAPANGAN -->
+    <section class="card-accessible p-4 sm:p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-slate-200 pb-4 mb-4">
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">🗂️ Antrean Kasus Warga (Hasil Penggabungan Laporan Berdekatan)</h2>
+          <p class="text-sm text-slate-700">Ubah status menjadi <strong>Terverifikasi Jurnalistik</strong> agar kasus tampil di Peta Publik Warga (radius ±300m).</p>
+        </div>
+        <select id="filter-status-jurnalis" onchange="renderJournalistCases()" class="min-h-[48px] px-3.5 rounded-xl border-2 border-slate-900 font-bold text-sm bg-white">
+          <option value="ALL">Semua Status Kasus</option>
+          <option value="Baru">● Baru</option>
+          <option value="Sedang Diverifikasi">▲ Sedang Diverifikasi</option>
+          <option value="Terverifikasi Jurnalistik">✔ Terverifikasi Jurnalistik</option>
+          <option value="Ditolak">✖ Ditolak</option>
+        </select>
+      </div>
+
+      <div id="journalist-cases-list" class="space-y-4">
+        <!-- Dirender via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-950 text-slate-300 border-t-4 border-slate-800 mt-10 py-5 px-4 text-xs sm:text-sm">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="font-bold text-white">MEJA REDAKSI SUARA SUNGAI — Citarum Tengah (Kec. Baleendah)</p>
+      <p>Perubahan status & tindak lanjut langsung tersinkronisasi ke Portal Warga.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    window.ssCloud = { ready: false, db: null, appId: 'suara-sungai-baleendah', doc, setDoc, onSnapshot, collection };
+
+    async function initCloudSync() {
+      try {
+        if (typeof __firebase_config === 'undefined') return;
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'suara-sungai-baleendah';
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        if (!auth.currentUser) return;
+        window.ssCloud = { ready: true, db, appId, doc, setDoc, onSnapshot, collection };
+
+        const pill = document.getElementById('sync-status-pill');
+        if (pill) pill.textContent = '● Cloud Sinkron Real-Time Aktif';
+
+        // Dengarkan laporan warga yang masuk secara real-time
+        const casesCol = collection(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases');
+        onSnapshot(casesCol, (snapshot) => {
+          if (snapshot.empty) {
+            if (typeof window.seedInitialCasesToCloud === 'function') {
+              window.seedInitialCasesToCloud();
+            }
+            return;
+          }
+          const cloudCases = [];
+          snapshot.forEach((d) => cloudCases.push(d.data()));
+          cloudCases.sort((a, b) => (b.skorPrioritas || 0) - (a.skorPrioritas || 0));
+          if (typeof window.applyCloudCases === 'function') {
+            window.applyCloudCases(cloudCases);
+          }
+        }, (err) => console.warn('Cloud listener error:', err));
+      } catch (e) {
+        console.warn('Cloud sync fallback to local:', e);
+      }
+    }
+    initCloudSync();
+  </script>
+
+  <script>
+    // =========================================================================
+    // KONFIGURASI SINKRONISASI ANTAR PLATFORM (PORTAL WARGA <-> MEJA JURNALIS)
+    // =========================================================================
+    const STORAGE_KEY_CASES = 'suara_sungai_cases_v1';
+    const STORAGE_KEY_PATTERNS = 'suara_sungai_patterns_v1';
+    const STORAGE_KEY_ENDPOINT = 'suara_sungai_appscript_url';
+    const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('suara_sungai_sync') : null;
+
+    const CATEGORY_META = {
+      'Air Hitam / Merah': { symbol: '●', hex: '#CC79A7', bg: 'bg-[#CC79A7]', text: 'text-white' },
+      'Busa Tebal':        { symbol: '■', hex: '#E69F00', bg: 'bg-[#E69F00]', text: 'text-slate-950' },
+      'Bau Kimia':         { symbol: '▲', hex: '#D55E00', bg: 'bg-[#D55E00]', text: 'text-white' },
+      'Ikan Mati Massal':  { symbol: '✚', hex: '#56B4E9', bg: 'bg-[#56B4E9]', text: 'text-slate-950' }
+    };
+
+    const STATUS_META = {
+      'Baru':                      { symbol: '●', badgeClass: 'bg-sky-100 text-slate-950 border-[#0072B2]' },
+      'Sedang Diverifikasi':       { symbol: '▲', badgeClass: 'bg-amber-100 text-slate-950 border-[#D55E00]' },
+      'Terverifikasi Jurnalistik': { symbol: '✔', badgeClass: 'bg-emerald-100 text-slate-950 border-[#009E73]' },
+      'Ditolak':                   { symbol: '✖', badgeClass: 'bg-slate-200 text-slate-900 border-slate-700' }
+    };
+
+    const DEFAULT_CASES_DATA = [
+      {
+        idKasus: 'KASUS-BE-001',
+        zona: 'Jembatan Baleendah',
+        patokan: 'Sekitar 150m hilir Jembatan Baleendah arah Andir',
+        kategori: 'Air Hitam / Merah',
+        waktu: 'Kamis, 18 Des • Sekitar Pukul 02.00 WIB',
+        jumlahLaporan: 8,
+        skorPrioritas: 92,
+        status: 'Terverifikasi Jurnalistik',
+        mapX: 415,
+        mapY: 225,
+        tindakLanjut: 'Tim jurnalis telah mengambil sampel visual di bawah Jembatan Baleendah pukul 05.30 WIB dan mengonfirmasi perubahan warna pekat bersama 3 ketua RW setempat. Laporan diteruskan ke DLH Kab. Bandung.',
+        pelaporPublik: ['Ibu Siti Aminah (RW 04)', 'Kang Dedi Mulyana', 'Warga Baleendah (6 pelapor)'],
+        tiketTerkait: ['SS-201', 'SS-204', 'SS-209']
+      },
+      {
+        idKasus: 'KASUS-BE-002',
+        zona: 'Pertemuan Cisangkuy - Bojongmalaka',
+        patokan: 'Pertemuan aliran Cisangkuy dekat Bojongmalaka',
+        kategori: 'Busa Tebal',
+        waktu: 'Sabtu, 20 Des • Pukul 06.30 WIB',
+        jumlahLaporan: 5,
+        skorPrioritas: 78,
+        status: 'Terverifikasi Jurnalistik',
+        mapX: 525,
+        mapY: 270,
+        tindakLanjut: 'Jurnalis memverifikasi gumpalan busa putih setinggi ±40 cm di pertemuan arus Cisangkuy–Citarum. Wawancara warga sekitar bantaran sungai sedang disusun untuk liputan mendalam.',
+        pelaporPublik: ['Bapak H. Tatang S.', 'Teh Rina Marlina', 'Warga Baleendah (3 pelapor)'],
+        tiketTerkait: ['SS-212', 'SS-215']
+      },
+      {
+        idKasus: 'KASUS-BE-003',
+        zona: 'Kel. Andir / Cieunteung',
+        patokan: 'Tanggul Citarum dekat Polder Cieunteung',
+        kategori: 'Bau Kimia',
+        waktu: 'Minggu, 21 Des • Pukul 21.15 WIB',
+        jumlahLaporan: 4,
+        skorPrioritas: 71,
+        status: 'Sedang Diverifikasi',
+        mapX: 225,
+        mapY: 195,
+        tindakLanjut: 'Jurnalis sedang menuju lokasi Polder Cieunteung untuk mengecek keluhan bau menyengat seperti obat/pelarut.',
+        pelaporPublik: ['Warga Baleendah (4 pelapor)'],
+        tiketTerkait: ['SS-218']
+      },
+      {
+        idKasus: 'KASUS-BE-004',
+        zona: 'Kel. Rancamanyar',
+        patokan: 'Bantaran Citarum arah Rancamanyar',
+        kategori: 'Ikan Mati Massal',
+        waktu: 'Senin, 22 Des • Pukul 07.00 WIB',
+        jumlahLaporan: 3,
+        skorPrioritas: 66,
+        status: 'Baru',
+        mapX: 720,
+        mapY: 215,
+        tindakLanjut: 'Menunggu peninjauan lapangan oleh jurnalis.',
+        pelaporPublik: ['Bapak Agus Kurniawan'],
+        tiketTerkait: ['SS-221']
+      }
+    ];
+
+    const DEFAULT_PATTERNS_DATA = [
+      {
+        id: 'POLA-DES-01',
+        judul: '8 Laporan: Air Menghitam Setiap Kamis Sekitar Pukul 02.00 WIB',
+        zona: 'Jembatan Baleendah → Kel. Andir',
+        kategori: 'Air Hitam / Merah',
+        jumlah: 8,
+        catatan: 'Terdeteksi berulang pada dini hari Kamis sepanjang bulan Desember (5 Des, 12 Des, 19 Des). Ditampilkan sebagai pola prioritas untuk ditelusuri jurnalis, bukan bukti pembuangan sengaja.'
+      },
+      {
+        id: 'POLA-DES-02',
+        judul: '5 Laporan: Busa Tebal Muncul Sabtu Pagi (06.00 – 07.30 WIB)',
+        zona: 'Pertemuan Cisangkuy - Bojongmalaka',
+        kategori: 'Busa Tebal',
+        jumlah: 5,
+        catatan: 'Muncul konsisten pada akhir pekan pagi hari saat debit aliran melambat. Perlu penelusuran jurnalis ke hulu pertemuan anak sungai.'
+      }
+    ];
+
+    let appsScriptEndpoint = localStorage.getItem(STORAGE_KEY_ENDPOINT) || '';
+    let casesData = JSON.parse(localStorage.getItem(STORAGE_KEY_CASES) || 'null') || JSON.parse(JSON.stringify(DEFAULT_CASES_DATA));
+    let decemberPatterns = JSON.parse(localStorage.getItem(STORAGE_KEY_PATTERNS) || 'null') || JSON.parse(JSON.stringify(DEFAULT_PATTERNS_DATA));
+
+    window.seedInitialCasesToCloud = async function() {
+      if (!window.ssCloud || !window.ssCloud.ready) return;
+      const { db, appId, doc, setDoc } = window.ssCloud;
+      for (const item of casesData) {
+        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases', item.idKasus), item);
+      }
+    };
+
+    window.applyCloudCases = function(cloudCases) {
+      casesData = cloudCases;
+      localStorage.setItem(STORAGE_KEY_CASES, JSON.stringify(casesData));
+      renderStats();
+      renderDecemberPatterns();
+      renderJournalistCases();
+    };
+
+    async function syncSingleCaseToCloud(caseObj) {
+      if (!window.ssCloud || !window.ssCloud.ready) return;
+      const { db, appId, doc, setDoc } = window.ssCloud;
+      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases', caseObj.idKasus), caseObj);
+    }
+
+    function persistAndBroadcast() {
+      localStorage.setItem(STORAGE_KEY_CASES, JSON.stringify(casesData));
+      localStorage.setItem(STORAGE_KEY_PATTERNS, JSON.stringify(decemberPatterns));
+      if (syncChannel) {
+        syncChannel.postMessage({ type: 'STATE_UPDATED', casesData, decemberPatterns });
+      }
+    }
+
+    async function pushToBackend(payload) {
+      persistAndBroadcast();
+      if (payload && payload.updatedCase) {
+        await syncSingleCaseToCloud(payload.updatedCase);
+      }
+      if (!appsScriptEndpoint) return;
+      try {
+        await fetch(appsScriptEndpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Gagal menyinkronkan ke Apps Script:', err);
+      }
+    }
+
+    async function syncFromSharedStorage(showFeedback = false) {
+      const localCases = localStorage.getItem(STORAGE_KEY_CASES);
+      const localPatterns = localStorage.getItem(STORAGE_KEY_PATTERNS);
+      if (localCases) casesData = JSON.parse(localCases);
+      if (localPatterns) decemberPatterns = JSON.parse(localPatterns);
+
+      if (appsScriptEndpoint) {
+        try {
+          const res = await fetch(appsScriptEndpoint + '?action=getCases');
+          const data = await res.json();
+          if (Array.isArray(data.cases) && data.cases.length > 0) {
+            casesData = data.cases;
+            persistAndBroadcast();
+          }
+        } catch (err) {
+          console.warn('Apps Script sync fallback ke penyimpanan lokal:', err);
+        }
+      }
+      renderStats();
+      renderDecemberPatterns();
+      renderJournalistCases();
+      if (showFeedback) {
+        showToast('Data Tersinkronisasi', 'Antrean laporan warga terbaru telah dimuat ke Meja Redaksi.');
+      }
+    }
+
+    function saveAppsScriptEndpoint() {
+      const val = document.getElementById('apps-script-url-input').value.trim();
+      appsScriptEndpoint = val;
+      localStorage.setItem(STORAGE_KEY_ENDPOINT, val);
+      syncFromSharedStorage(true);
+    }
+
+    function renderStats() {
+      const grid = document.getElementById('journalist-stats-grid');
+      if (!grid) return;
+      const totalReports = casesData.reduce((sum, c) => sum + (c.jumlahLaporan || 1), 0);
+      const baruCount = casesData.filter(c => c.status === 'Baru').length;
+      const prosesCount = casesData.filter(c => c.status === 'Sedang Diverifikasi').length;
+      const verifiedCount = casesData.filter(c => c.status === 'Terverifikasi Jurnalistik').length;
+
+      grid.innerHTML = `
+        <div class="card-accessible p-4 bg-white">
+          <p class="text-xs font-extrabold uppercase text-slate-600">Total Laporan Warga</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">${totalReports}</p>
+          <p class="text-xs text-slate-700 mt-1">Tergabung jadi ${casesData.length} kasus</p>
+        </div>
+        <div class="card-accessible p-4 bg-sky-50 border-[#0072B2]">
+          <p class="text-xs font-extrabold uppercase text-slate-700">● Kasus Baru</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">${baruCount}</p>
+          <p class="text-xs text-slate-700 mt-1">Perlu peninjauan awal</p>
+        </div>
+        <div class="card-accessible p-4 bg-amber-50 border-[#D55E00]">
+          <p class="text-xs font-extrabold uppercase text-slate-700">▲ Sedang Diverifikasi</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">${prosesCount}</p>
+          <p class="text-xs text-slate-700 mt-1">Jurnalis cek lapangan</p>
+        </div>
+        <div class="card-accessible p-4 bg-emerald-50 border-[#009E73]">
+          <p class="text-xs font-extrabold uppercase text-slate-700">✔ Terverifikasi Publik</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">${verifiedCount}</p>
+          <p class="text-xs text-slate-700 mt-1">Tayang di peta radius 300m</p>
+        </div>
+      `;
+    }
+
+    function renderDecemberPatterns() {
+      const container = document.getElementById('december-patterns-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      decemberPatterns.forEach(p => {
+        const meta = CATEGORY_META[p.kategori] || CATEGORY_META['Air Hitam / Merah'];
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-2xl bg-white border-2 border-slate-900 shadow-sm';
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="px-2.5 py-1 rounded-md font-extrabold text-xs border-2 border-slate-900 ${meta.bg} ${meta.text}">
+              ${meta.symbol} ${escapeHtml(p.kategori)}
+            </span>
+            <span class="text-xs font-extrabold text-slate-700">${escapeHtml(p.id)}</span>
+          </div>
+          <h3 class="font-extrabold text-base text-slate-950">${escapeHtml(p.judul)}</h3>
+          <p class="text-xs font-bold text-[#0072B2] mt-1">📍 Koridor: ${escapeHtml(p.zona)}</p>
+          <p class="text-sm text-slate-800 mt-2 leading-relaxed">${escapeHtml(p.catatan)}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderJournalistCases() {
+      const container = document.getElementById('journalist-cases-list');
+      const filterVal = document.getElementById('filter-status-jurnalis').value;
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = filterVal === 'ALL'
+        ? casesData
+        : casesData.filter(c => c.status === filterVal);
+
+      filtered.forEach(item => {
+        const catMeta = CATEGORY_META[item.kategori] || CATEGORY_META['Air Hitam / Merah'];
+        const stMeta = STATUS_META[item.status] || STATUS_META['Baru'];
+
+        const row = document.createElement('div');
+        row.className = 'p-4 sm:p-5 rounded-2xl bg-slate-50 border-2 border-slate-900 space-y-3';
+        row.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-lg font-extrabold text-xs bg-slate-900 text-white">${escapeHtml(item.idKasus)}</span>
+              <span class="px-3 py-1 rounded-lg font-extrabold text-xs border-2 border-slate-900 ${catMeta.bg} ${catMeta.text}">
+                ${catMeta.symbol} ${escapeHtml(item.kategori)}
+              </span>
+              <span class="px-3 py-1 rounded-lg font-extrabold text-xs bg-amber-200 text-slate-950 border-2 border-slate-900">
+                Skor Prioritas: ${item.skorPrioritas}/100 (${item.jumlahLaporan} Laporan)
+              </span>
+            </div>
+            <span class="px-3 py-1 rounded-lg border-2 font-extrabold text-xs sm:text-sm ${stMeta.badgeClass}">
+              ${stMeta.symbol} ${escapeHtml(item.status)}
+            </span>
+          </div>
+
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-950">${escapeHtml(item.zona)} — ${escapeHtml(item.patokan)}</h3>
+            <p class="text-sm text-slate-700 font-bold">🕒 ${escapeHtml(item.waktu)} • Tiket Warga: ${escapeHtml(item.tiketTerkait.join(', '))}</p>
+            <p class="text-xs text-slate-700 mt-1"><strong>Kontributor Tercatat:</strong> ${escapeHtml((item.pelaporPublik || []).join(', '))}</p>
+          </div>
+
+          <div class="bg-white p-3 rounded-xl border border-slate-300">
+            <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Catatan Tindak Lanjut Lapangan (Otomatis Tampil di Portal Warga):</label>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="text" id="note-${item.idKasus}" value="${escapeHtml(item.tindakLanjut)}" class="flex-1 min-h-[46px] px-3 rounded-lg border-2 border-slate-400 text-sm font-medium text-slate-950" />
+              <button onclick="saveJournalistNote('${item.idKasus}')" class="px-4 py-2 bg-slate-900 text-white rounded-lg font-bold text-xs sm:text-sm shrink-0">Simpan Catatan</button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <span class="text-xs font-extrabold text-slate-700 mr-1">Ubah Status Verifikasi:</span>
+            <button onclick="updateCaseStatus('${item.idKasus}', 'Baru')" class="px-3 py-2 rounded-lg border-2 border-slate-800 bg-white hover:bg-sky-100 text-xs font-bold">● Baru</button>
+            <button onclick="updateCaseStatus('${item.idKasus}', 'Sedang Diverifikasi')" class="px-3 py-2 rounded-lg border-2 border-slate-800 bg-white hover:bg-amber-100 text-xs font-bold">▲ Sedang Diverifikasi</button>
+            <button onclick="updateCaseStatus('${item.idKasus}', 'Terverifikasi Jurnalistik')" class="px-3 py-2 rounded-lg border-2 border-slate-900 bg-[#009E73] text-white text-xs font-extrabold">✔ Terverifikasi Jurnalistik (Tayangkan ke Peta Warga)</button>
+            <button onclick="updateCaseStatus('${item.idKasus}', 'Ditolak')" class="px-3 py-2 rounded-lg border-2 border-slate-800 bg-slate-200 hover:bg-slate-300 text-xs font-bold">✖ Ditolak</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function updateCaseStatus(idKasus, newStatus) {
+      const target = casesData.find(c => c.idKasus === idKasus);
+      if (!target) return;
+      target.status = newStatus;
+      pushToBackend({
+        action: 'updateStatus',
+        idKasus: idKasus,
+        status: newStatus,
+        tindakLanjut: target.tindakLanjut,
+        updatedCase: target,
+        casesData: casesData
+      });
+      renderStats();
+      renderJournalistCases();
+      showToast('Status Terkirim ke Portal Warga', `${idKasus} diubah menjadi "${newStatus}" dan langsung tersinkronisasi.`);
+    }
+
+    function saveJournalistNote(idKasus) {
+      const target = casesData.find(c => c.idKasus === idKasus);
+      const input = document.getElementById('note-' + idKasus);
+      if (!target || !input) return;
+      target.tindakLanjut = input.value.trim();
+      pushToBackend({
+        action: 'updateNote',
+        idKasus: idKasus,
+        status: target.status,
+        tindakLanjut: target.tindakLanjut,
+        updatedCase: target,
+        casesData: casesData
+      });
+      showToast('Catatan Tindak Lanjut Tersimpan', 'Pembaruan lapangan sudah dikirim ke halaman status warga.');
+    }
+
+    let toastTimeout = null;
+    function showToast(title, message) {
+      const banner = document.getElementById('toast-banner');
+      if (!banner) return;
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-message').textContent = message;
+      banner.classList.remove('hidden');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(hideToast, 4500);
+    }
+
+    function hideToast() {
+      const banner = document.getElementById('toast-banner');
+      if (banner) banner.classList.add('hidden');
+    }
+
+    function setFontScale(scale) {
+      document.documentElement.style.setProperty('--font-scale', scale);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Dengarkan laporan baru secara real-time dari Portal Warga
+    if (syncChannel) {
+      syncChannel.onmessage = function(event) {
+        if (event.data && event.data.type === 'STATE_UPDATED') {
+          casesData = event.data.casesData || casesData;
+          decemberPatterns = event.data.decemberPatterns || decemberPatterns;
+          renderStats();
+          renderDecemberPatterns();
+          renderJournalistCases();
+          showToast('Laporan Warga Baru Masuk!', 'Data kasus & pola Desember baru saja diperbarui dari Portal Warga.');
+        }
+      };
+    }
+
+    window.addEventListener('storage', function(e) {
+      if (e.key === STORAGE_KEY_CASES || e.key === STORAGE_KEY_PATTERNS) {
+        syncFromSharedStorage(false);
+      }
+    });
+
+    window.onload = function() {
+      const endpointInput = document.getElementById('apps-script-url-input');
+      if (endpointInput && appsScriptEndpoint) {
+        endpointInput.value = appsScriptEndpoint;
+      }
+      syncFromSharedStorage(false);
+    };
+  </script>
+</body>
+</html>
