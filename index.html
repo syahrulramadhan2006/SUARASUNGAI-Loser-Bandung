@@ -3,494 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suara Sungai — Pantau Citarum Tengah (Kec. Baleendah)</title>
+  <title>Meja Jurnalis — Suara Sungai (Citarum Tengah / Baleendah)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* =====================================================================
-       PALET RAMAH BUTA WARNA (OKABE-ITO) & AKSESIBILITAS LANSIA (WCAG AAA)
-       Tidak pernah mengandalkan warna saja: setiap status & kategori memakai
-       kombinasi WARNA KONTRAS + BENTUK IKON GEOMETRIS + LABEL TEKS TEBAL.
-       ===================================================================== */
     :root {
       --bg-page: #F8F8F4;
       --bg-card: #FFFFFF;
       --text-main: #0F172A;
-      --text-muted: #334155;
-      --border-strong: #1E293B;
-
-      /* Okabe-Ito Colorblind-Safe Palette */
-      --oi-blue: #0072B2;       /* Aksi Utama / Baru */
-      --oi-orange: #D55E00;     /* Peringatan / Sedang Diverifikasi / Bau Kimia */
-      --oi-green: #009E73;      /* Terverifikasi Jurnalistik / Aman */
-      --oi-purple: #CC79A7;     /* Air Hitam atau Merah */
-      --oi-yellow: #E69F00;     /* Busa Tebal */
-      --oi-skyblue: #56B4E9;    /* Ikan Mati Massal */
-      --oi-black: #111827;      /* Ditolak / Kontras Tinggi */
-
-      --font-scale: 1;
     }
-
-    html {
-      font-size: calc(18px * var(--font-scale));
-      scroll-behavior: smooth;
-    }
-
     body {
       font-family: 'Atkinson Hyperlegible', 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-page);
       color: var(--text-main);
       line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
     }
-
-    /* Fokus jelas untuk pengguna keyboard / lansia */
-    *:focus-visible {
-      outline: 4px solid #E69F00 !important;
-      outline-offset: 3px !important;
-    }
-
-    /* Tombol ramah lansia: area sentuh minimal 54px, batas tegas */
-    .btn-accessible {
-      min-height: 54px;
-      padding: 0.75rem 1.25rem;
-      border-width: 2.5px;
-      border-radius: 0.875rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      transition: transform 0.1s ease, background-color 0.15s ease;
-      cursor: pointer;
-    }
-    .btn-accessible:active {
-      transform: scale(0.98);
-    }
-
     .card-accessible {
       background-color: var(--bg-card);
       border: 2.5px solid #CBD5E1;
       border-radius: 1.25rem;
       box-shadow: 0 4px 0 rgba(15, 23, 42, 0.08);
     }
-
-    /* Bubble Chat Styling */
-    .chat-bubble-ai {
-      background-color: #FFFFFF;
-      border: 2.5px solid #0072B2;
-      border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
-      color: #0F172A;
-      box-shadow: 0 3px 0 rgba(0, 114, 178, 0.15);
+    .btn-accessible {
+      min-height: 48px;
+      padding: 0.5rem 1rem;
+      border-width: 2px;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
     }
-
-    .chat-bubble-user {
-      background-color: #0F172A;
-      border: 2.5px solid #0F172A;
-      border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
-      color: #FFFFFF;
-    }
-
-    /* Pola garis miring untuk pembeda non-warna tambahan */
-    .pattern-stripe {
-      background-image: repeating-linear-gradient(
-        -45deg,
-        rgba(255,255,255,0.18),
-        rgba(255,255,255,0.18) 8px,
-        transparent 8px,
-        transparent 16px
-      );
-    }
-
-    /* Animasi mengetik AI */
-    @keyframes pulseDot {
-      0%, 80%, 100% { transform: scale(0.75); opacity: 0.4; }
-      40% { transform: scale(1.1); opacity: 1; }
-    }
-    .typing-dot {
-      animation: pulseDot 1.3s infinite ease-in-out both;
-    }
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-    /* Custom scrollbar nyaman */
-    ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-track { background: #E2E8F0; border-radius: 8px; }
-    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 8px; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- =====================================================================
-       TOP ACCESSIBILITY & IDENTITY BAR (RAMAH LANSIA & BUTA WARNA)
-       ===================================================================== -->
-  <header class="bg-white border-b-4 border-slate-900 sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-      <!-- Identitas Platform -->
+  <!-- Header Jurnalis -->
+  <header class="bg-slate-900 text-white border-b-4 border-slate-950 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-[#0072B2] border-2 border-slate-900 flex items-center justify-center text-white shrink-0" aria-hidden="true">
-          <!-- Ikon Sungai & Suara -->
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2M3 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 3 2M12 4v6m-3-3l3-3 3 3"/>
-          </svg>
-        </div>
+        <div class="w-12 h-12 rounded-xl bg-[#D55E00] border-2 border-white flex items-center justify-center font-extrabold text-white text-xl">📝</div>
         <div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-950">SUARA SUNGAI</h1>
-            <span class="px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider bg-amber-200 text-slate-950 border-2 border-slate-900 rounded-md">
-              Citarum Tengah (Baleendah)
-            </span>
-          </div>
-          <p class="text-sm text-slate-700 font-medium">By Tim Loser</p>
+          <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">MEJA REDAKSI JURNALIS</h1>
+          <p class="text-xs sm:text-sm text-sky-200">Verifikasi Laporan Warga & Kelola Status Kasus (Baleendah)</p>
         </div>
       </div>
-
-      <!-- Kontrol Ukuran Huruf Ramah Lansia -->
-      <div class="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border-2 border-slate-900" role="group" aria-label="Pengatur Ukuran Teks">
-        <span class="text-xs font-extrabold text-slate-800 px-1.5">Ukuran Huruf:</span>
-        <button onclick="setFontScale(1)" id="font-btn-1" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-extrabold text-sm">A</button>
-        <button onclick="setFontScale(1.15)" id="font-btn-115" class="px-3 py-1.5 rounded-lg bg-white text-slate-950 border border-slate-400 font-extrabold text-base">A+</button>
-        <button onclick="setFontScale(1.3)" id="font-btn-13" class="px-3 py-1.5 rounded-lg bg-white text-slate-950 border border-slate-400 font-extrabold text-lg">A++</button>
+      <div>
+        <a href="index.html" target="_blank" class="btn-accessible bg-[#0072B2] text-white border-white hover:bg-sky-700 text-sm">
+          🌐 Buka Portal Warga (Tab Baru)
+        </a>
       </div>
     </div>
-
-    <!-- Navigasi Utama: Khusus Portal Warga (Hanya Lapor & Pantau Status) -->
-    <nav class="bg-slate-900 text-white" aria-label="Menu Utama">
-      <div id="main-nav-grid" class="max-w-6xl mx-auto px-3 py-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <button onclick="switchTab('lapor')" id="tab-lapor" class="nav-tab btn-accessible bg-[#0072B2] text-white border-white text-center text-sm sm:text-base">
-          <span aria-hidden="true">💬</span>
-          <span>Lapor</span>
-        </button>
-        <button onclick="switchTab('publik')" id="tab-publik" class="nav-tab btn-accessible bg-slate-800 text-slate-100 border-slate-600 hover:bg-slate-700 text-center text-sm sm:text-base">
-          <span aria-hidden="true">🗺️</span>
-          <span>Status</span>
-        </button>
-      </div>
-    </nav>
   </header>
 
-  <!-- Banner Notifikasi Aksesibel (Pengganti alert()) -->
-  <div id="toast-banner" class="hidden fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-md z-50 bg-slate-950 text-white border-4 border-[#E69F00] rounded-2xl p-4 shadow-2xl" role="status" aria-live="polite">
+  <!-- Banner Notifikasi -->
+  <div id="toast-banner" class="hidden fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-md z-50 bg-slate-950 text-white border-4 border-[#E69F00] rounded-2xl p-4 shadow-2xl">
     <div class="flex items-start justify-between gap-3">
       <div>
         <p id="toast-title" class="font-extrabold text-base text-[#E69F00]">Notifikasi</p>
         <p id="toast-message" class="text-sm text-slate-100 mt-0.5"></p>
       </div>
-      <button onclick="hideToast()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold border border-slate-500 shrink-0">Tutup</button>
+      <button onclick="hideToast()" class="px-2.5 py-1 bg-slate-800 rounded-lg text-xs font-bold">Tutup</button>
     </div>
   </div>
 
-  <!-- =====================================================================
-       KONTEN UTAMA
-       ===================================================================== -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6">
+  <!-- Konten Utama Jurnalis -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 space-y-6">
 
-    <!-- ===================================================================
-         TAB 1: BUBBLE CHAT AI PELAPORAN WARGA (SANGAT MUDAH UNTUK ORANG TUA)
-         =================================================================== -->
-    <section id="view-lapor" class="space-y-6">
-      <!-- Banner Panduan Singkat -->
-      <div class="card-accessible p-4 sm:p-5 bg-sky-50 border-[#0072B2]">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">Ceritakan Kondisi Sungai Citarum di Baleendah</h2>
-            <p class="text-slate-800 text-sm sm:text-base mt-1">
-              Cukup kirim <strong>1 foto</strong> atau <strong>1 kalimat singkat</strong>. Asisten AI kami akan menemani mengobrol pelan-pelan untuk melengkapi detailnya.
-            </p>
-          </div>
-          <button onclick="resetChatSession()" class="btn-accessible bg-white text-slate-950 border-slate-900 hover:bg-slate-100 shrink-0 text-sm">
-            🔄 Obrolan Baru
-          </button>
+    <!-- Panel Kontrol Redaksi -->
+    <div class="card-accessible p-5 bg-white">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">📋 Daftar Kasus & Laporan Masuk dari Warga</h2>
+          <p class="text-sm text-slate-700 mt-1">Ubah status kasus menjadi <strong>"Terverifikasi Jurnalistik"</strong> agar otomatis tampil di Peta Publik Warga.</p>
         </div>
+        <button onclick="loadCasesFromCloud()" class="btn-accessible bg-slate-100 text-slate-950 border-slate-900 text-sm">
+          🔄 Segarkan Data Cloud
+        </button>
       </div>
+    </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- Kolom Kiri (7 kolom): Ruang Chat Interaktif -->
-        <div class="lg:col-span-7 card-accessible flex flex-col overflow-hidden">
-          <!-- Header Chat -->
-          <div class="bg-slate-900 text-white px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-[#009E73] border-2 border-white flex items-center justify-center font-extrabold text-white">AI</div>
-              <div>
-                <p class="font-bold text-base leading-tight">Si Ujang</p>
-                <p class="text-xs text-sky-200">Siap mendengarkan dan membantu</p>
-              </div>
-            </div>
-            <span id="chat-step-badge" class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-500 text-xs font-bold">
-              Langkah 1/6
-            </span>
-          </div>
-
-          <!-- Area Pesan Bubble -->
-          <div id="chat-messages" class="p-4 space-y-4 h-[430px] overflow-y-auto bg-[#F1F5F9]" aria-live="polite">
-            <!-- Diisi otomatis oleh JavaScript -->
-          </div>
-
-          <!-- Tombol Jawaban Cepat (Quick Replies Ramah Lansia) -->
-          <div id="quick-replies-area" class="px-4 py-2.5 bg-amber-50 border-t-2 border-slate-300 flex flex-wrap gap-2">
-            <!-- Diisi dinamis sesuai pertanyaan AI -->
-          </div>
-
-          <!-- Input Pesan & Unggah Foto -->
-          <div class="p-3 sm:p-4 bg-white border-t-2 border-slate-900 space-y-3">
-            <!-- Preview Foto jika dipilih -->
-            <div id="photo-preview-bar" class="hidden items-center justify-between bg-slate-100 p-2.5 rounded-xl border-2 border-slate-800">
-              <div class="flex items-center gap-3">
-                <img id="photo-preview-img" src="" alt="Pratinjau foto laporan" class="w-14 h-14 object-cover rounded-lg border-2 border-slate-900" />
-                <div>
-                  <p id="photo-preview-name" class="text-sm font-bold text-slate-950">foto_sungai.jpg</p>
-                  <p id="photo-exif-badge" class="text-xs font-bold text-amber-800">⚠️ Tanpa metadata GPS/waktu — dicatat sebagai petunjuk awal</p>
-                </div>
-              </div>
-              <button onclick="clearSelectedPhoto()" class="px-3 py-1.5 bg-white border-2 border-slate-900 rounded-lg font-bold text-xs">Hapus</button>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-2">
-              <!-- Tombol Ambil / Pilih Foto -->
-              <label for="chat-photo-input" class="btn-accessible bg-amber-200 hover:bg-amber-300 text-slate-950 border-slate-900 cursor-pointer shrink-0 text-sm">
-                <span>📷 Foto</span>
-                <input type="file" id="chat-photo-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
-              </label>
-
-              <!-- Kotak Ketik Pesan -->
-              <input
-                type="text"
-                id="chat-text-input"
-                placeholder="Ketik laporan Anda disini ya...."
-                class="flex-1 min-h-[54px] px-4 rounded-xl border-2 border-slate-900 text-base font-medium text-slate-950 placeholder:text-slate-500"
-                onkeydown="if(event.key==='Enter') sendUserMessage()"
-              />
-
-              <!-- Tombol Kirim -->
-              <button onclick="sendUserMessage()" class="btn-accessible bg-[#0072B2] hover:bg-sky-800 text-white border-slate-950 shrink-0">
-                <span>Kirim ➤</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Kolom Kanan (5 kolom): Ringkasan Terstruktur Real-time & Mode Privasi -->
-        <div class="lg:col-span-5 space-y-5">
-          <!-- Kartu Data Terstruktur yang Sedang Dirapikan AI -->
-          <div class="card-accessible p-4 sm:p-5">
-            <div class="flex items-center justify-between border-b-2 border-slate-200 pb-3 mb-3">
-              <h3 class="font-extrabold text-base sm:text-lg text-slate-950">📋 Catatan Laporan Otomatis</h3>
-              <span class="text-xs font-bold px-2.5 py-1 bg-slate-200 rounded-md text-slate-900">Terstruktur</span>
-            </div>
-
-            <dl class="space-y-3 text-sm sm:text-base">
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">1. Kategori:</dt>
-                <dd id="draft-kategori" class="font-extrabold text-slate-950 text-right">Belum terisi</dd>
-              </div>
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">2. Patokan Lokasi:</dt>
-                <dd id="draft-lokasi" class="font-extrabold text-slate-950 text-right">Belum terisi</dd>
-              </div>
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">3. Waktu Kejadian:</dt>
-                <dd id="draft-waktu" class="font-extrabold text-slate-950 text-right">Belum terisi</dd>
-              </div>
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">4. Arah Aliran:</dt>
-                <dd id="draft-aliran" class="font-extrabold text-slate-950 text-right">Belum terisi</dd>
-              </div>
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">5. Bukti Foto:</dt>
-                <dd id="draft-foto" class="font-extrabold text-slate-950 text-right">Belum ada foto</dd>
-              </div>
-              <div class="flex justify-between gap-2 border-b border-slate-200 pb-2">
-                <dt class="font-bold text-slate-700">6. Mode Publikasi:</dt>
-                <dd id="draft-privasi" class="font-extrabold text-[#0072B2] text-right">Belum dipilih</dd>
-              </div>
-              <div class="flex justify-between gap-2">
-                <dt class="font-bold text-slate-700">7. Izin Dihubungi:</dt>
-                <dd id="draft-kontak" class="font-extrabold text-slate-950 text-right">Belum terisi</dd>
-              </div>
-            </dl>
-
-            <!-- Contoh Simulasi Cepat untuk Demo Juri Hackathon -->
-            <div class="mt-4 pt-3 border-t-2 border-dashed border-slate-300">
-              <p class="text-xs font-bold text-slate-700 mb-2">⚡ Uji Coba Cepat</p>
-              <div class="flex flex-wrap gap-2">
-                
-                <button onclick="simulateElderlyReport()" class="px-3 py-2 text-xs font-bold bg-slate-100 hover:bg-slate-200 border-2 border-slate-800 rounded-lg">
-                  👴 Contoh Laporan Ujang
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Penjelasan 3 Mode Privasi Pelapor -->
-          <div class="card-accessible p-4 bg-white">
-            <h3 class="font-extrabold text-base text-slate-950 mb-2">🛡️ Hak Pelapor (3 Pilihan Mode)</h3>
-            <ul class="space-y-2 text-sm text-slate-800">
-              <li class="p-2 rounded-lg bg-slate-100 border border-slate-300">
-                <strong>🔒 Mode 1 - Hanya Diterima Tim:</strong> Rahasia penuh, hanya untuk bahan penelusuran jurnalis.
-              </li>
-              <li class="p-2 rounded-lg bg-slate-100 border border-slate-300">
-                <strong>👤 Mode 2 - Publik Tanpa Nama:</strong> Kasus tampil di peta publik sebagai "Warga Baleendah".
-              </li>
-              <li class="p-2 rounded-lg bg-slate-100 border border-slate-300">
-                <strong>🏅 Mode 3 - Publik Dengan Nama:</strong> Nama Anda dicantumkan sebagai bentuk pengakuan kontribusi warga.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         TAB 2: PETA PUBLIK (RADIUS 300M) & PANTAU STATUS TIKET WARGA
-         =================================================================== -->
-    <section id="view-publik" class="hidden space-y-6">
-      <!-- Pencarian Status Tiket Warga -->
-      <div class="card-accessible p-4 sm:p-5 bg-white">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">🔍 Pantau Status & Tindak Lanjut Laporan Anda</h2>
-            <p class="text-sm text-slate-700 mt-1">Status hanya dapat diubah oleh tim jurnalis setelah pemeriksaan lapangan.</p>
-          </div>
-          <button onclick="syncFromBackend(true)" class="btn-accessible bg-slate-100 hover:bg-slate-200 text-slate-950 border-slate-900 text-xs sm:text-sm shrink-0">
-            🔄 Segarkan Status Terbaru
-          </button>
-        </div>
-        <div class="mt-3 flex flex-col sm:flex-row gap-2 max-w-xl">
-          <input type="text" id="ticket-search-input" placeholder="Contoh: SS-204" class="flex-1 min-h-[54px] px-4 rounded-xl border-2 border-slate-900 font-bold uppercase" />
-          <button onclick="searchTicketStatus()" class="btn-accessible bg-[#0072B2] text-white border-slate-950">Cek Laporan</button>
-        </div>
-        <div id="ticket-search-result" class="hidden mt-4 p-4 rounded-xl bg-sky-50 border-2 border-[#0072B2]"></div>
-      </div>
-
-      <!-- Peta Publik Citarum Tengah — Kecamatan Baleendah (Generalisasi Radius 300m) -->
-      <div class="card-accessible p-4 sm:p-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
-          <div>
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-950">🗺️ Peta Publik Kasus Terverifikasi Jurnalistik (Kec. Baleendah)</h2>
-            <p class="text-sm text-slate-700">
-              Demi melindungi keselamatan warga pelapor, titik lokasi digeneralisasi dalam <strong>zona lingkaran radius ±300 meter</strong>. Hanya kasus berstatus <strong>Terverifikasi Jurnalistik</strong> yang tampil di sini.
-            </p>
-          </div>
-        </div>
-
-        <!-- Legenda Ramah Buta Warna (Bentuk + Pola + Warna Okabe-Ito) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 p-3 bg-slate-100 rounded-xl border-2 border-slate-400 text-xs sm:text-sm font-bold">
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#CC79A7] text-white border-2 border-slate-900 font-extrabold">●</span>
-            <span>Air Hitam / Merah</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center w-7 h-7 rounded-none bg-[#E69F00] text-slate-950 border-2 border-slate-900 font-extrabold">■</span>
-            <span>Busa Tebal</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center w-7 h-7 rotate-45 bg-[#D55E00] text-white border-2 border-slate-900 font-extrabold"><span class="-rotate-45">▲</span></span>
-            <span>Bau Kimia</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[#56B4E9] text-slate-950 border-2 border-slate-900 font-extrabold">✚</span>
-            <span>Ikan Mati Massal</span>
-          </div>
-        </div>
-
-        <!-- Peta SVG Skematis Citarum Tengah - Kecamatan Baleendah -->
-        <div class="relative w-full overflow-hidden rounded-2xl border-4 border-slate-900 bg-[#E6F0EC]">
-          <svg id="baleendah-map-svg" viewBox="0 0 900 440" class="w-full h-auto block" role="img" aria-label="Peta Sungai Citarum di Kecamatan Baleendah menampilkan zona kasus terverifikasi radius 300 meter">
-            <!-- Latar Wilayah & Grid -->
-            <defs>
-              <pattern id="gridPattern" width="45" height="45" patternUnits="userSpaceOnUse">
-                <path d="M 45 0 L 0 0 0 45" fill="none" stroke="#CBD5E1" stroke-width="1"/>
-              </pattern>
-            </defs>
-            <rect width="900" height="440" fill="url(#gridPattern)" />
-
-            <!-- Jalan Utama & Jembatan Patokan -->
-            <path d="M 180 0 L 210 440" stroke="#94A3B8" stroke-width="10" stroke-dasharray="12 6" fill="none" />
-            <text x="125" y="35" font-size="13" font-weight="bold" fill="#334155">Jl. Raya Bojongsoang</text>
-
-            <path d="M 520 0 L 490 440" stroke="#94A3B8" stroke-width="10" stroke-dasharray="12 6" fill="none" />
-            <text x="530" y="35" font-size="13" font-weight="bold" fill="#334155">Jl. Raya Banjaran - Baleendah</text>
-
-            <!-- Anak Sungai Cisangkuy bertemu Citarum -->
-            <path d="M 560 440 Q 540 330 510 245" stroke="#0072B2" stroke-width="18" fill="none" opacity="0.85" />
-            <text x="565" y="405" font-size="14" font-weight="bold" fill="#0F172A">Sungai Cisangkuy ↗</text>
-
-            <!-- Aliran Utama Sungai Citarum Bagian Tengah (Baleendah) -->
-            <path d="M 0 210 Q 220 175 450 235 T 900 205" stroke="#0072B2" stroke-width="34" fill="none" />
-            <path d="M 0 210 Q 220 175 450 235 T 900 205" stroke="#BAE6FD" stroke-width="4" stroke-dasharray="18 14" fill="none" />
-
-            <!-- Penanda Arah Arus -->
-            <rect x="35" y="152" width="215" height="28" rx="6" fill="#0F172A" />
-            <text x="45" y="171" font-size="13" font-weight="bold" fill="#FFFFFF">⬅ Arah Aliran Citarum (ke Hilir)</text>
-
-            <!-- Label Kelurahan / Kampung di Kec. Baleendah -->
-            <g font-size="14" font-weight="bold" fill="#1E293B">
-              <rect x="65" y="255" width="165" height="30" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
-              <text x="77" y="275">Kel. Andir / Cieunteung</text>
-
-              <rect x="330" y="120" width="175" height="30" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
-              <text x="342" y="140">Jembatan Baleendah</text>
-
-              <rect x="665" y="135" width="175" height="30" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
-              <text x="677" y="155">Kel. Rancamanyar</text>
-
-              <rect x="650" y="265" width="190" height="30" rx="6" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
-              <text x="662" y="285">Pertemuan Bojongmalaka</text>
-            </g>
-
-            <!-- Zona Kasus Terverifikasi akan dirender lewat JS di dalam grup ini -->
-            <g id="map-verified-markers"></g>
-          </svg>
-        </div>
-
-        <!-- Daftar Kartu Kasus Terverifikasi Jurnalistik + Pengakuan Nama Warga -->
-        <div class="mt-6">
-          <h3 class="font-extrabold text-lg text-slate-950 mb-3">📋 Daftar Kasus Terverifikasi & Tindak Lanjut Lapangan</h3>
-          <div id="public-verified-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Diisi otomatis oleh JavaScript -->
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Daftar Kasus Redaksi -->
+    <div id="journalist-cases-container" class="space-y-4">
+      <!-- Diisi otomatis oleh JavaScript -->
+    </div>
 
   </main>
 
-  <!-- =====================================================================
-       FOOTER RAMAH PENGGUNA (KHUSUS PORTAL WARGA - READ ONLY STATUS)
-       ===================================================================== -->
-  <footer class="bg-slate-900 text-slate-200 border-t-4 border-slate-950 mt-10 py-6 px-4">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-      <div>
-        <p class="font-extrabold text-white text-base">SUARA SUNGAI - Portal Warga Citarum Tengah (Kec. Baleendah)</p>
-        <p class="text-slate-300">Dibuat oleh tim LOSER from Bandung - 2026</p>
-      </div>
-      <div class="text-xs text-slate-300 text-center sm:text-right space-y-1">
-        <p>Status kasus hanya dapat diubah oleh tim jurnalis setelah verifikasi lapangan.</p>
-        <p>Privasi Warga Dilindungi.</p>
-      </div>
-    </div>
+  <footer class="bg-slate-900 text-slate-300 py-6 px-4 mt-10 text-center text-xs">
+    <p>Meja Redaksi Jurnalis — Suara Sungai Baleendah (2026)</p>
   </footer>
 
-  <!-- =====================================================================
-       LOGIKA INTERAKTIF PORTAL WARGA (CHAT AI, PETA PUBLIK, REAL-TIME SYNC)
-       ===================================================================== -->
+  <!-- Firebase & Logika Jurnalis -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, onSnapshot, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    window.ssCloud = { ready: false, db: null, appId: 'suara-sungai-baleendah', doc, setDoc, onSnapshot, collection };
+    let db = null;
+    let appId = 'suara-sungai-baleendah';
+    let casesData = [];
 
-    async function initCloudSync() {
+    async function initJournalistCloud() {
       try {
         if (typeof __firebase_config === 'undefined') return;
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'suara-sungai-baleendah';
+        db = getFirestore(app);
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'suara-sungai-baleendah';
 
         if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
           await signInWithCustomToken(auth, __initial_auth_token);
@@ -499,825 +124,127 @@
         }
 
         if (!auth.currentUser) return;
-        window.ssCloud = { ready: true, db, appId, doc, setDoc, onSnapshot, collection };
 
-        // Dengarkan perubahan kasus secara real-time dari Meja Jurnalis
+        // Dengarkan perubahan secara real-time
         const casesCol = collection(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases');
         onSnapshot(casesCol, (snapshot) => {
-          if (snapshot.empty) {
-            // Inisialisasi data awal ke cloud jika belum ada
-            if (typeof window.seedInitialCasesToCloud === 'function') {
-              window.seedInitialCasesToCloud();
-            }
-            return;
-          }
-          const cloudCases = [];
-          snapshot.forEach((d) => cloudCases.push(d.data()));
-          cloudCases.sort((a, b) => (b.skorPrioritas || 0) - (a.skorPrioritas || 0));
-          if (typeof window.applyCloudCases === 'function') {
-            window.applyCloudCases(cloudCases);
-          }
+          casesData = [];
+          snapshot.forEach((d) => casesData.push(d.data()));
+          casesData.sort((a, b) => (b.skorPrioritas || 0) - (a.skorPrioritas || 0));
+          renderJournalistList();
         }, (err) => console.warn('Cloud listener error:', err));
       } catch (e) {
-        console.warn('Cloud sync fallback to local:', e);
-      }
-    }
-    initCloudSync();
-  </script>
-
-  <script>
-    // =========================================================================
-    // 1. STATE & DATA BERSAMA (TERHUBUNG REAL-TIME DENGAN MEJA JURNALIS)
-    // =========================================================================
-    const STORAGE_KEY_CASES = 'suara_sungai_cases_v1';
-    const STORAGE_KEY_PATTERNS = 'suara_sungai_patterns_v1';
-    const STORAGE_KEY_ENDPOINT = 'suara_sungai_appscript_url';
-    const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('suara_sungai_sync') : null;
-
-    // Palet Okabe-Ito + Bentuk Geometris (Ramah Buta Warna)
-    const CATEGORY_META = {
-      'Air Hitam / Merah': { symbol: '●', hex: '#CC79A7', bg: 'bg-[#CC79A7]', text: 'text-white' },
-      'Busa Tebal':        { symbol: '■', hex: '#E69F00', bg: 'bg-[#E69F00]', text: 'text-slate-950' },
-      'Bau Kimia':         { symbol: '▲', hex: '#D55E00', bg: 'bg-[#D55E00]', text: 'text-white' },
-      'Ikan Mati Massal':  { symbol: '✚', hex: '#56B4E9', bg: 'bg-[#56B4E9]', text: 'text-slate-950' }
-    };
-
-    const STATUS_META = {
-      'Baru':                      { symbol: '●', badgeClass: 'bg-sky-100 text-slate-950 border-[#0072B2]' },
-      'Sedang Diverifikasi':       { symbol: '▲', badgeClass: 'bg-amber-100 text-slate-950 border-[#D55E00]' },
-      'Terverifikasi Jurnalistik': { symbol: '✔', badgeClass: 'bg-emerald-100 text-slate-950 border-[#009E73]' },
-      'Ditolak':                   { symbol: '✖', badgeClass: 'bg-slate-200 text-slate-900 border-slate-700' }
-    };
-
-    let appsScriptEndpoint = localStorage.getItem(STORAGE_KEY_ENDPOINT) || '';
-    let currentChatStep = 0; // 0: awal, 1: kategori, 2: lokasi, 3: waktu, 4: arah aliran, 5: foto, 6: privasi & kontak, 7: selesai
-    let pendingPhoto = null;
-
-    let draftReport = {
-      kategori: '',
-      zonaBaleendah: '',
-      patokanLokasi: '',
-      waktuKejadian: '',
-      hariKejadian: 'Kamis',
-      jamKejadian: '02:00',
-      arahAliran: '',
-      fotoAda: false,
-      fotoNama: '',
-      fotoUrl: '',
-      modePrivasi: '',
-      namaPelapor: '',
-      izinKontak: '',
-      deskripsiSingkat: ''
-    };
-
-    // Data Kasus Terkumpul (Hasil penggabungan laporan warga yang berdekatan)
-    const DEFAULT_CASES_DATA = [
-      {
-        idKasus: 'KASUS-BE-001',
-        zona: 'Jembatan Baleendah',
-        patokan: 'Sekitar 150m hilir Jembatan Baleendah arah Andir',
-        kategori: 'Air Hitam / Merah',
-        waktu: 'Kamis, 18 Des • Sekitar Pukul 02.00 WIB',
-        jumlahLaporan: 8,
-        skorPrioritas: 92,
-        status: 'Terverifikasi Jurnalistik',
-        mapX: 415,
-        mapY: 225,
-        tindakLanjut: 'Tim jurnalis telah mengambil sampel visual di bawah Jembatan Baleendah pukul 05.30 WIB dan mengonfirmasi perubahan warna pekat bersama 3 ketua RW setempat. Laporan diteruskan ke DLH Kab. Bandung.',
-        pelaporPublik: ['Ibu Siti Aminah (RW 04)', 'Kang Dedi Mulyana', 'Warga Baleendah (6 pelapor)'],
-        tiketTerkait: ['SS-201', 'SS-204', 'SS-209']
-      },
-      {
-        idKasus: 'KASUS-BE-002',
-        zona: 'Pertemuan Cisangkuy - Bojongmalaka',
-        patokan: 'Pertemuan aliran Cisangkuy dekat Bojongmalaka',
-        kategori: 'Busa Tebal',
-        waktu: 'Sabtu, 20 Des • Pukul 06.30 WIB',
-        jumlahLaporan: 5,
-        skorPrioritas: 78,
-        status: 'Terverifikasi Jurnalistik',
-        mapX: 525,
-        mapY: 270,
-        tindakLanjut: 'Jurnalis memverifikasi gumpalan busa putih setinggi ±40 cm di pertemuan arus Cisangkuy–Citarum. Wawancara warga sekitar bantaran sungai sedang disusun untuk liputan mendalam.',
-        pelaporPublik: ['Bapak H. Tatang S.', 'Teh Rina Marlina', 'Warga Baleendah (3 pelapor)'],
-        tiketTerkait: ['SS-212', 'SS-215']
-      },
-      {
-        idKasus: 'KASUS-BE-003',
-        zona: 'Kel. Andir / Cieunteung',
-        patokan: 'Tanggul Citarum dekat Polder Cieunteung',
-        kategori: 'Bau Kimia',
-        waktu: 'Minggu, 21 Des • Pukul 21.15 WIB',
-        jumlahLaporan: 4,
-        skorPrioritas: 71,
-        status: 'Sedang Diverifikasi',
-        mapX: 225,
-        mapY: 195,
-        tindakLanjut: 'Jurnalis sedang menuju lokasi Polder Cieunteung untuk mengecek keluhan bau menyengat seperti obat/pelarut.',
-        pelaporPublik: ['Warga Baleendah (4 pelapor)'],
-        tiketTerkait: ['SS-218']
-      },
-      {
-        idKasus: 'KASUS-BE-004',
-        zona: 'Kel. Rancamanyar',
-        patokan: 'Bantaran Citarum arah Rancamanyar',
-        kategori: 'Ikan Mati Massal',
-        waktu: 'Senin, 22 Des • Pukul 07.00 WIB',
-        jumlahLaporan: 3,
-        skorPrioritas: 66,
-        status: 'Baru',
-        mapX: 720,
-        mapY: 215,
-        tindakLanjut: 'Menunggu peninjauan lapangan oleh jurnalis.',
-        pelaporPublik: ['Bapak Agus Kurniawan'],
-        tiketTerkait: ['SS-221']
-      }
-    ];
-
-    let casesData = JSON.parse(localStorage.getItem(STORAGE_KEY_CASES) || 'null') || JSON.parse(JSON.stringify(DEFAULT_CASES_DATA));
-
-    // Data Pola Bulan Desember
-    const DEFAULT_PATTERNS_DATA = [
-      {
-        id: 'POLA-DES-01',
-        judul: '8 Laporan: Air Menghitam Setiap Kamis Sekitar Pukul 02.00 WIB',
-        zona: 'Jembatan Baleendah → Kel. Andir',
-        kategori: 'Air Hitam / Merah',
-        jumlah: 8,
-        catatan: 'Terdeteksi berulang pada dini hari Kamis sepanjang bulan Desember (5 Des, 12 Des, 19 Des). Ditampilkan sebagai pola prioritas untuk ditelusuri jurnalis, bukan bukti pembuangan sengaja.'
-      },
-      {
-        id: 'POLA-DES-02',
-        judul: '5 Laporan: Busa Tebal Muncul Sabtu Pagi (06.00 – 07.30 WIB)',
-        zona: 'Pertemuan Cisangkuy - Bojongmalaka',
-        kategori: 'Busa Tebal',
-        jumlah: 5,
-        catatan: 'Muncul konsisten pada akhir pekan pagi hari saat debit aliran melambat. Perlu penelusuran jurnalis ke hulu pertemuan anak sungai.'
-      }
-    ];
-
-    let decemberPatterns = JSON.parse(localStorage.getItem(STORAGE_KEY_PATTERNS) || 'null') || JSON.parse(JSON.stringify(DEFAULT_PATTERNS_DATA));
-
-    window.seedInitialCasesToCloud = async function() {
-      if (!window.ssCloud || !window.ssCloud.ready) return;
-      const { db, appId, doc, setDoc } = window.ssCloud;
-      for (const item of casesData) {
-        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases', item.idKasus), item);
-      }
-    };
-
-    window.applyCloudCases = function(cloudCases) {
-      casesData = cloudCases;
-      localStorage.setItem(STORAGE_KEY_CASES, JSON.stringify(casesData));
-      renderPublicMapAndList();
-    };
-
-    async function syncSingleCaseToCloud(caseObj) {
-      if (!window.ssCloud || !window.ssCloud.ready) return;
-      const { db, appId, doc, setDoc } = window.ssCloud;
-      await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases', caseObj.idKasus), caseObj);
-    }
-
-    function persistSharedState() {
-      localStorage.setItem(STORAGE_KEY_CASES, JSON.stringify(casesData));
-      localStorage.setItem(STORAGE_KEY_PATTERNS, JSON.stringify(decemberPatterns));
-      if (syncChannel) {
-        syncChannel.postMessage({ type: 'STATE_UPDATED', casesData, decemberPatterns });
+        console.warn('Cloud sync fallback:', e);
+        loadLocalFallback();
       }
     }
 
-    // Sinkronisasi dua arah dengan Platform Jurnalis & Google Apps Script Web App
-    async function syncFromBackend(showFeedback = false) {
-      appsScriptEndpoint = localStorage.getItem(STORAGE_KEY_ENDPOINT) || appsScriptEndpoint;
-      const localCases = localStorage.getItem(STORAGE_KEY_CASES);
-      if (localCases) casesData = JSON.parse(localCases);
-
-      if (appsScriptEndpoint) {
-        try {
-          const res = await fetch(appsScriptEndpoint + '?action=getCases');
-          const data = await res.json();
-          if (Array.isArray(data.cases) && data.cases.length > 0) {
-            casesData = data.cases;
-            localStorage.setItem(STORAGE_KEY_CASES, JSON.stringify(casesData));
-          }
-        } catch (err) {
-          console.warn('Sinkronisasi Apps Script memakai cache lokal:', err);
-        }
+    async function loadCasesFromCloud() {
+      if (!db) {
+        loadLocalFallback();
+        return;
       }
-      renderPublicMapAndList();
-      if (showFeedback) {
-        showToast('Status Diperbarui', 'Data status verifikasi terbaru dari platform jurnalis telah dimuat.');
-      }
-    }
-
-    async function pushToBackend(payload) {
-      persistSharedState();
-      if (payload && payload.updatedCase) {
-        await syncSingleCaseToCloud(payload.updatedCase);
-      }
-      if (!appsScriptEndpoint) return;
       try {
-        await fetch(appsScriptEndpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        const querySnapshot = await getDocs(collection(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases'));
+        casesData = [];
+        querySnapshot.forEach((d) => casesData.push(d.data()));
+        casesData.sort((a, b) => (b.skorPrioritas || 0) - (a.skorPrioritas || 0));
+        renderJournalistList();
+        showToast('Data Dimuat', 'Data kasus terbaru berhasil ditarik dari Cloud Database.');
       } catch (err) {
-        console.warn('Gagal mengirim ke Apps Script:', err);
+        loadLocalFallback();
       }
     }
 
-    function switchTab(tabName) {
-      ['lapor', 'publik'].forEach(name => {
-        document.getElementById('view-' + name).classList.add('hidden');
-        const btn = document.getElementById('tab-' + name);
-        btn.classList.remove('bg-[#0072B2]', 'text-white', 'border-white');
-        btn.classList.add('bg-slate-800', 'text-slate-100', 'border-slate-600');
-      });
-
-      document.getElementById('view-' + tabName).classList.remove('hidden');
-      const activeBtn = document.getElementById('tab-' + tabName);
-      activeBtn.classList.remove('bg-slate-800', 'text-slate-100', 'border-slate-600');
-      activeBtn.classList.add('bg-[#0072B2]', 'text-white', 'border-white');
-
-      if (tabName === 'publik') {
-        syncFromBackend(false);
+    function loadLocalFallback() {
+      const local = localStorage.getItem('suara_sungai_cases_v1');
+      if (local) {
+        casesData = JSON.parse(local);
+        renderJournalistList();
       }
     }
 
-    let toastTimeout = null;
-    function showToast(title, message) {
-      const banner = document.getElementById('toast-banner');
-      if (!banner) return;
-      document.getElementById('toast-title').textContent = title;
-      document.getElementById('toast-message').textContent = message;
-      banner.classList.remove('hidden');
-      if (toastTimeout) clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(hideToast, 4500);
-    }
+    window.updateCaseStatus = async function(idKasus, newStatus, newTindakLanjut) {
+      const target = casesData.find(c => c.idKasus === idKasus);
+      if (!target) return;
+      target.status = newStatus;
+      if (newTindakLanjut !== undefined) {
+        target.tindakLanjut = newTindakLanjut;
+      }
 
-    function hideToast() {
-      const banner = document.getElementById('toast-banner');
-      if (banner) banner.classList.add('hidden');
-    }
+      // Simpan ke localStorage & Broadcast
+      localStorage.setItem('suara_sungai_cases_v1', JSON.stringify(casesData));
+      if (typeof BroadcastChannel !== 'undefined') {
+        const bc = new BroadcastChannel('suara_sungai_sync');
+        bc.postMessage({ type: 'STATE_UPDATED', casesData });
+      }
 
-    function setFontScale(scale) {
-      document.documentElement.style.setProperty('--font-scale', scale);
-      const mapBtn = { '1': 'font-btn-1', '1.15': 'font-btn-115', '1.3': 'font-btn-13' };
-      Object.entries(mapBtn).forEach(([k, id]) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        if (String(scale) === k) {
-          el.className = 'px-3 py-1.5 rounded-lg bg-slate-900 text-white font-extrabold text-sm';
-        } else {
-          el.className = 'px-3 py-1.5 rounded-lg bg-white text-slate-950 border border-slate-400 font-extrabold text-sm';
+      // Simpan ke Firebase Cloud
+      if (db) {
+        try {
+          await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'suara_sungai_cases', idKasus), target);
+        } catch (e) {
+          console.warn('Gagal update cloud:', e);
         }
-      });
-    }
-
-    // =========================================================================
-    // 4. LOGIKA BUBBLE CHAT AI WAWANCARA PELAPOR (RAMAH ORANG TUA)
-    // =========================================================================
-    function initChat() {
-      currentChatStep = 0;
-      pendingPhoto = null;
-      draftReport = {
-        kategori: '',
-        zonaBaleendah: '',
-        patokanLokasi: '',
-        waktuKejadian: '',
-        hariKejadian: 'Kamis',
-        jamKejadian: '02:00',
-        arahAliran: '',
-        fotoAda: false,
-        fotoNama: '',
-        fotoUrl: '',
-        modePrivasi: '',
-        namaPelapor: '',
-        izinKontak: '',
-        deskripsiSingkat: ''
-      };
-      updateDraftSidebar();
-      clearSelectedPhoto();
-
-      const chatBox = document.getElementById('chat-messages');
-      chatBox.innerHTML = '';
-      document.getElementById('chat-step-badge').textContent = 'Langkah 1/6';
-
-      appendAiBubble(
-        'Sampurasun 👋 Saya <strong>Si Ujang</strong>, asisten pelaporan <strong>Suara Sungai Baleendah</strong>.<br><br>' +
-        'Apa yang dilihat atau dicium di Sungai Citarum hari ini? boleh langsung menekan tombol pilihan di bawah, mengetik 1 kalimat singkat, atau <strong>mengirim 1 foto saja</strong>.'
-      );
-
-      setQuickReplies([
-        { label: '● Air Berubah Warna', value: 'Air berubah Warna' },
-        { label: '■ Busa Tebal', value: 'Ada busa tebal di sungai' },
-        { label: '▲ Bau Kimia Menyengat', value: 'Tercium bau kimia menyengat' },
-        { label: '✚ Ikan Mati Massal', value: 'Banyak ikan mati mengambang' },
-        { label: '♾️ Lainnya', value: 'Lainnya' }
-      ]);
-    }
-
-    function resetChatSession() {
-      initChat();
-      showToast('Obrolan Baru Dimulai', 'Silakan kirim foto atau ceritakan kondisi sungai yang Anda temui.');
-    }
-
-    function appendAiBubble(htmlContent) {
-      const chatBox = document.getElementById('chat-messages');
-      const wrapper = document.createElement('div');
-      wrapper.className = 'flex items-start gap-2.5 max-w-[92%]';
-      wrapper.innerHTML = `
-        <div class="w-9 h-9 rounded-full bg-[#009E73] border-2 border-slate-900 flex items-center justify-center font-extrabold text-white text-xs shrink-0 mt-1">AI</div>
-        <div class="chat-bubble-ai p-3.5 text-sm sm:text-base leading-relaxed">
-          ${htmlContent}
-        </div>
-      `;
-      chatBox.appendChild(wrapper);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function appendUserBubble(text, photoObj = null) {
-      const chatBox = document.getElementById('chat-messages');
-      const wrapper = document.createElement('div');
-      wrapper.className = 'flex justify-end';
-      let imgHtml = '';
-      if (photoObj && photoObj.url) {
-        imgHtml = `
-          <div class="mb-2">
-            <img src="${photoObj.url}" alt="Foto unggahan warga" class="max-h-44 rounded-xl border-2 border-white object-cover" />
-            <p class="text-xs text-amber-300 mt-1 font-bold">📎 ${escapeHtml(photoObj.name)} (Tanpa metadata GPS — dicatat sebagai petunjuk)</p>
-          </div>
-        `;
       }
-      wrapper.innerHTML = `
-        <div class="chat-bubble-user p-3.5 max-w-[88%] text-sm sm:text-base leading-relaxed">
-          ${imgHtml}
-          <p>${escapeHtml(text)}</p>
-        </div>
-      `;
-      chatBox.appendChild(wrapper);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
 
-    function setQuickReplies(options) {
-      const area = document.getElementById('quick-replies-area');
-      area.innerHTML = '';
-      if (!options || options.length === 0) {
-        area.classList.add('hidden');
-        return;
-      }
-      area.classList.remove('hidden');
-      options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'px-3.5 py-2.5 rounded-xl bg-white hover:bg-amber-200 text-slate-950 border-2 border-slate-900 font-bold text-xs sm:text-sm shadow-sm transition';
-        btn.textContent = opt.label;
-        btn.onclick = () => {
-          document.getElementById('chat-text-input').value = opt.value;
-          sendUserMessage();
-        };
-        area.appendChild(btn);
-      });
-    }
+      showToast('Status Diperbarui', `Kasus ${idKasus} berhasil diubah menjadi: ${newStatus}`);
+      renderJournalistList();
+    };
 
-    function handlePhotoUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        pendingPhoto = {
-          name: file.name,
-          url: e.target.result,
-          hasExif: false
-        };
-        document.getElementById('photo-preview-img').src = e.target.result;
-        document.getElementById('photo-preview-name').textContent = file.name;
-        document.getElementById('photo-preview-bar').classList.remove('hidden');
-        document.getElementById('photo-preview-bar').classList.add('flex');
-      };
-      reader.readAsDataURL(file);
-    }
+    function renderJournalistList() {
+      const container = document.getElementById('journalist-cases-container');
+      if (!container) return;
+      container.innerHTML = '';
 
-    function clearSelectedPhoto() {
-      pendingPhoto = null;
-      const input = document.getElementById('chat-photo-input');
-      if (input) input.value = '';
-      const bar = document.getElementById('photo-preview-bar');
-      if (bar) {
-        bar.classList.add('hidden');
-        bar.classList.remove('flex');
-      }
-    }
-
-    function detectCategoryFromText(text) {
-      const t = text.toLowerCase();
-      if (t.includes('hitam') || t.includes('merah') || t.includes('pekat') || t.includes('warna')) return 'Air Hitam / Merah';
-      if (t.includes('busa') || t.includes('buih') || t.includes('salju')) return 'Busa Tebal';
-      if (t.includes('bau') || t.includes('kimia') || t.includes('menyengat') || t.includes('obat')) return 'Bau Kimia';
-      if (t.includes('ikan') || t.includes('mati') || t.includes('mengambang')) return 'Ikan Mati Massal';
-      return '';
-    }
-
-    function sendUserMessage() {
-      const inputEl = document.getElementById('chat-text-input');
-      const rawText = inputEl.value.trim();
-      if (!rawText && !pendingPhoto) {
-        showToast('Pesan Masih Kosong', 'Silakan ketik singkat, pilih tombol cepat, atau lampirkan foto sungai.');
+      if (casesData.length === 0) {
+        container.innerHTML = `<p class="p-4 text-slate-600 bg-white card-accessible">Belum ada laporan kasus.</p>`;
         return;
       }
 
-      const messageText = rawText || 'Saya mengirim foto kondisi sungai.';
-      const attachedPhoto = pendingPhoto ? { ...pendingPhoto } : null;
-
-      appendUserBubble(messageText, attachedPhoto);
-      inputEl.value = '';
-      clearSelectedPhoto();
-
-      if (attachedPhoto) {
-        draftReport.fotoAda = true;
-        draftReport.fotoNama = attachedPhoto.name;
-        draftReport.fotoUrl = attachedPhoto.url;
-      }
-
-      setTimeout(() => processAiConversation(messageText, attachedPhoto), 350);
-    }
-
-    function processAiConversation(text, attachedPhoto) {
-      // Langkah 0 -> Menangkap keluhan awal atau foto saja
-      if (currentChatStep === 0) {
-        draftReport.deskripsiSingkat = text;
-        const detected = detectCategoryFromText(text);
-
-        if (attachedPhoto && !detected) {
-          currentChatStep = 1;
-          document.getElementById('chat-step-badge').textContent = 'Langkah 1/6';
-          appendAiBubble(
-            'Terima kasih banyak, foto sudah saya terima dengan baik. Karena foto dari pesan sering tidak membawa catatan GPS otomatis, saya catat sebagai <strong>petunjuk visual awal</strong>.<br><br>' +
-            'Supaya laporan ini rapi untuk jurnalis, kondisi di foto tersebut paling sesuai dengan yang mana?'
-          );
-          setQuickReplies([
-            { label: '● Air Hitam / Merah', value: 'Air Hitam / Merah' },
-            { label: '■ Busa Tebal', value: 'Busa Tebal' },
-            { label: '▲ Bau Kimia', value: 'Bau Kimia' },
-            { label: '✚ Ikan Mati Massal', value: 'Ikan Mati Massal' }
-          ]);
-          updateDraftSidebar();
-          return;
-        }
-
-        draftReport.kategori = detected || 'Air Hitam / Merah';
-        currentChatStep = 2;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 2/6';
-        updateDraftSidebar();
-        appendAiBubble(
-          `Baik, saya catat sebagai kategori <strong>${escapeHtml(draftReport.kategori)}</strong>.<br><br>` +
-          'Di sebelah mana <strong>patokan lokasi</strong> kejadiannya di Kecamatan Baleendah? (Misal: dekat Jembatan Baleendah, Polder Cieunteung, atau Rancamanyar)'
-        );
-        setQuickReplies([
-          { label: '📍 Jembatan Baleendah', value: 'Dekat Jembatan Baleendah' },
-          { label: '📍 Kel. Andir / Cieunteung', value: 'Sekitar Polder Cieunteung, Andir' },
-          { label: '📍 Pertemuan Cisangkuy', value: 'Pertemuan Cisangkuy - Bojongmalaka' },
-          { label: '📍 Kel. Rancamanyar', value: 'Bantaran Citarum Rancamanyar' }
-        ]);
-        return;
-      }
-
-      // Langkah 1 -> Memastikan Kategori jika awalnya hanya mengirim foto
-      if (currentChatStep === 1) {
-        draftReport.kategori = detectCategoryFromText(text) || text;
-        currentChatStep = 2;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 2/6';
-        updateDraftSidebar();
-        appendAiBubble(
-          `Siap, tercatat kategori <strong>${escapeHtml(draftReport.kategori)}</strong>.<br><br>` +
-          'Sekarang, di mana <strong>patokan lokasi</strong> persisnya di wilayah Baleendah?'
-        );
-        setQuickReplies([
-          { label: '📍 Jembatan Baleendah', value: 'Dekat Jembatan Baleendah' },
-          { label: '📍 Kel. Andir / Cieunteung', value: 'Sekitar Polder Cieunteung, Andir' },
-          { label: '📍 Pertemuan Cisangkuy', value: 'Pertemuan Cisangkuy - Bojongmalaka' },
-          { label: '📍 Kel. Rancamanyar', value: 'Bantaran Citarum Rancamanyar' }
-        ]);
-        return;
-      }
-
-      // Langkah 2 -> Patokan Lokasi -> Tanya Waktu Kejadian
-      if (currentChatStep === 2) {
-        draftReport.patokanLokasi = text;
-        if (text.toLowerCase().includes('andir') || text.toLowerCase().includes('cieunteung')) {
-          draftReport.zonaBaleendah = 'Kel. Andir / Cieunteung';
-        } else if (text.toLowerCase().includes('cisangkuy') || text.toLowerCase().includes('bojongmalaka')) {
-          draftReport.zonaBaleendah = 'Pertemuan Cisangkuy - Bojongmalaka';
-        } else if (text.toLowerCase().includes('rancamanyar')) {
-          draftReport.zonaBaleendah = 'Kel. Rancamanyar';
-        } else {
-          draftReport.zonaBaleendah = 'Jembatan Baleendah';
-        }
-
-        currentChatStep = 3;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 3/6';
-        updateDraftSidebar();
-        appendAiBubble(
-          `Patokan lokasi di <strong>${escapeHtml(draftReport.patokanLokasi)}</strong> sudah tercatat.<br><br>` +
-          'Kira-kira <strong>hari dan jam berapa</strong> kejadian ini mulai terlihat atau tercium?'
-        );
-        setQuickReplies([
-          { label: '🕒 Kamis Dini Hari (02.00 WIB)', value: 'Kamis sekitar pukul 02.00 WIB' },
-          { label: '🌅 Pagi Ini (06.30 WIB)', value: 'Tadi pagi pukul 06.30 WIB' },
-          { label: '🌙 Tadi Malam (21.00 WIB)', value: 'Tadi malam sekitar pukul 21.00 WIB' }
-        ]);
-        return;
-      }
-
-      // Langkah 3 -> Waktu Kejadian -> Tanya Arah Aliran
-      if (currentChatStep === 3) {
-        draftReport.waktuKejadian = text;
-        currentChatStep = 4;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 4/6';
-        updateDraftSidebar();
-        appendAiBubble(
-          'Terima kasih. Untuk membantu jurnalis melacak sumbernya, ke mana <strong>arah aliran</strong> air atau bau tersebut bergerak?'
-        );
-        setQuickReplies([
-          { label: '⬅ Mengalir ke Hilir (arah Dayeuhkolot/Andir)', value: 'Mengalir ke arah hilir (Andir / Dayeuhkolot)' },
-          { label: '↗ Dari Anak Sungai Cisangkuy', value: 'Masuk dari aliran Sungai Cisangkuy' },
-          { label: '⏸ Air Tampak Menggenang / Lambat', value: 'Arus lambat / menggenang di tepian' }
-        ]);
-        return;
-      }
-
-      // Langkah 4 -> Arah Aliran -> Cek Foto Asli (jika belum ada)
-      if (currentChatStep === 4) {
-        draftReport.arahAliran = text;
-        currentChatStep = 5;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 5/6';
-        updateDraftSidebar();
-
-        if (draftReport.fotoAda) {
-          appendAiBubble(
-            'Foto asli sudah dilampirkan sebelumnya dan ditandai sebagai petunjuk awal.<br><br>' +
-            'Sekarang mohon pilih <strong>Mode Publikasi & Privasi</strong> yang Bapak/Ibu inginkan:'
-          );
-          currentChatStep = 6;
-          document.getElementById('chat-step-badge').textContent = 'Langkah 6/6';
-          setQuickReplies([
-            { label: '🔒 Mode 1: Hanya Diterima Tim', value: 'Mode 1: Hanya Diterima Tim' },
-            { label: '👤 Mode 2: Publik Tanpa Nama', value: 'Mode 2: Publik Tanpa Nama' },
-            { label: '🏅 Mode 3: Publik Dengan Nama (Pak Ujang)', value: 'Mode 3: Publik Dengan Nama — Bapak Ujang Suryana' }
-          ]);
-        } else {
-          appendAiBubble(
-            'Apakah Bapak/Ibu memiliki <strong>foto asli</strong> kondisi sungai saat ini? Jika ada, silakan tekan tombol kuning <strong>📷 Kirim Foto</strong> di bawah, atau tekan tombol lewati jika tidak sempat memfoto.'
-          );
-          setQuickReplies([
-            { label: '⏭️ Lanjut Tanpa Foto', value: 'Tidak sempat memfoto, lanjut saja' }
-          ]);
-        }
-        return;
-      }
-
-      // Langkah 5 -> Foto -> Tanya Mode Privasi
-      if (currentChatStep === 5) {
-        currentChatStep = 6;
-        document.getElementById('chat-step-badge').textContent = 'Langkah 6/6';
-        updateDraftSidebar();
-        appendAiBubble(
-          'Baik, Bapak/Ibu berhak penuh menentukan bagaimana laporan ini ditampilkan:<br>' +
-          '1️⃣ <strong>Hanya Diterima Tim</strong> (rahasia untuk verifikasi jurnalis)<br>' +
-          '2️⃣ <strong>Dipublikasikan Tanpa Nama</strong> (tampil sebagai Warga Baleendah)<br>' +
-          '3️⃣ <strong>Dipublikasikan Dengan Nama</strong> (nama dicantumkan sebagai penghargaan kontribusi)'
-        );
-        setQuickReplies([
-          { label: '🔒 Mode 1: Hanya Diterima Tim', value: 'Mode 1: Hanya Diterima Tim' },
-          { label: '👤 Mode 2: Publik Tanpa Nama', value: 'Mode 2: Publik Tanpa Nama' },
-          { label: '🏅 Mode 3: Publik Dengan Nama (Pak Ujang)', value: 'Mode 3: Publik Dengan Nama — Bapak Ujang Suryana' }
-        ]);
-        return;
-      }
-
-      // Langkah 6 -> Mode Privasi -> Tanya Izin Dihubungi Kembali
-      if (currentChatStep === 6) {
-        draftReport.modePrivasi = text;
-        if (text.includes('Dengan Nama')) {
-          const parts = text.split('—');
-          draftReport.namaPelapor = parts[1] ? parts[1].trim() : 'Warga Baleendah (Terdaftar)';
-        } else {
-          draftReport.namaPelapor = 'Warga Baleendah';
-        }
-        currentChatStep = 7;
-        updateDraftSidebar();
-        appendAiBubble(
-          'Terakhir, apakah Bapak/Ibu <strong>bersedia dihubungi kembali</strong> oleh jurnalis kami bila perlu konfirmasi lapangan? (Boleh tulis nomor WA atau pilih tidak perlu)'
-        );
-        setQuickReplies([
-          { label: '✅ Ya, Boleh Dihubungi (0812-2044-XXXX)', value: 'Ya, bersedia dihubungi (0812-2044-8890)' },
-          { label: '🙅 Tidak Usah Dihubungi', value: 'Tidak perlu dihubungi kembali' }
-        ]);
-        return;
-      }
-
-      // Langkah 7 -> Selesai & Gabungkan ke Daftar Kasus
-      if (currentChatStep === 7) {
-        draftReport.izinKontak = text;
-        updateDraftSidebar();
-        const ticketCode = finalizeAndAggregateReport();
-        currentChatStep = 8;
-        setQuickReplies([
-          { label: '🗺️ Lihat Peta Publik & Status', value: '__GO_PUBLIK__' },
-          { label: '🔄 Buat Laporan Baru Lainnya', value: '__RESET_CHAT__' }
-        ]);
-        appendAiBubble(
-          `Alhamdulillah, laporan Bapak/Ibu telah tersimpan rapi dan <strong>terkirim ke meja redaksi jurnalis</strong> dengan Nomor Tiket: <strong>${ticketCode}</strong>.<br><br>` +
-          'Sistem otomatis menggabungkan laporan ini dengan laporan warga lain yang berdekatan di <strong>' + escapeHtml(draftReport.zonaBaleendah) + '</strong>. Status verifikasi akan diperbarui setelah jurnalis memeriksa lapangan.<br><br>' +
-          'Silakan pantau perkembangan verifikasi melalui menu <strong>2. Peta & Status</strong>.'
-        );
-        return;
-      }
-
-      if (text === '__GO_PUBLIK__') switchTab('publik');
-      if (text === '__RESET_CHAT__') resetChatSession();
-    }
-
-    function updateDraftSidebar() {
-      document.getElementById('draft-kategori').textContent = draftReport.kategori || 'Belum terisi';
-      document.getElementById('draft-lokasi').textContent = draftReport.patokanLokasi || 'Belum terisi';
-      document.getElementById('draft-waktu').textContent = draftReport.waktuKejadian || 'Belum terisi';
-      document.getElementById('draft-aliran').textContent = draftReport.arahAliran || 'Belum terisi';
-      document.getElementById('draft-foto').textContent = draftReport.fotoAda ? `Ada (${draftReport.fotoNama} • Petunjuk)` : 'Belum ada foto';
-      document.getElementById('draft-privasi').textContent = draftReport.modePrivasi || 'Belum dipilih';
-      document.getElementById('draft-kontak').textContent = draftReport.izinKontak || 'Belum terisi';
-    }
-
-    function finalizeAndAggregateReport() {
-      const randomNum = Math.floor(225 + Math.random() * 70);
-      const ticketId = 'SS-' + randomNum;
-
-      // Cari kasus berdekatan untuk digabung (clustering lokasi & kategori)
-      let matchedCase = casesData.find(c =>
-        c.zona === draftReport.zonaBaleendah && c.kategori === draftReport.kategori
-      );
-
-      let targetCaseObj = null;
-
-      if (matchedCase) {
-        matchedCase.jumlahLaporan += 1;
-        matchedCase.skorPrioritas = Math.min(99, matchedCase.skorPrioritas + 4);
-        matchedCase.tiketTerkait.push(ticketId);
-        if (draftReport.modePrivasi.includes('Dengan Nama') && draftReport.namaPelapor) {
-          matchedCase.pelaporPublik.unshift(draftReport.namaPelapor);
-        }
-        targetCaseObj = matchedCase;
-      } else {
-        const coordsMap = {
-          'Jembatan Baleendah': { x: 415, y: 225 },
-          'Kel. Andir / Cieunteung': { x: 225, y: 195 },
-          'Pertemuan Cisangkuy - Bojongmalaka': { x: 525, y: 270 },
-          'Kel. Rancamanyar': { x: 720, y: 215 }
-        };
-        const pt = coordsMap[draftReport.zonaBaleendah] || { x: 415, y: 225 };
-        targetCaseObj = {
-          idKasus: 'KASUS-BE-00' + (casesData.length + 1),
-          zona: draftReport.zonaBaleendah || 'Jembatan Baleendah',
-          patokan: draftReport.patokanLokasi || 'Bantaran Citarum Baleendah',
-          kategori: draftReport.kategori || 'Air Hitam / Merah',
-          waktu: draftReport.waktuKejadian || 'Baru saja dilaporkan',
-          jumlahLaporan: 1,
-          skorPrioritas: 65,
-          status: 'Baru',
-          mapX: pt.x,
-          mapY: pt.y,
-          tindakLanjut: 'Laporan baru masuk melalui Chat AI. Menunggu peninjauan lapangan oleh jurnalis.',
-          pelaporPublik: draftReport.modePrivasi.includes('Dengan Nama') ? [draftReport.namaPelapor] : ['Warga Baleendah'],
-          tiketTerkait: [ticketId]
-        };
-        casesData.unshift(targetCaseObj);
-      }
-
-      // Perbarui hitungan pola Desember jika cocok
-      if (draftReport.kategori === 'Air Hitam / Merah' && draftReport.waktuKejadian.toLowerCase().includes('kamis')) {
-        decemberPatterns[0].jumlah += 1;
-        decemberPatterns[0].judul = `${decemberPatterns[0].jumlah} Laporan: Air Menghitam Setiap Kamis Sekitar Pukul 02.00 WIB`;
-      }
-
-      // Kirim ke Cloud Database, penyimpanan bersama, & Google Apps Script
-      pushToBackend({
-        action: 'newReport',
-        ticketId: ticketId,
-        report: draftReport,
-        updatedCase: targetCaseObj,
-        casesData: casesData
-      });
-
-      showToast('Laporan Terkirim ke Jurnalis!', `Nomor tiket Anda ${ticketId}. Status akan diperbarui setelah verifikasi jurnalis.`);
-      return ticketId;
-    }
-
-    function simulatePhotoOnlyStart() {
-      initChat();
-      pendingPhoto = {
-        name: 'air_citarum_pekat.jpg',
-        url: 'https://placehold.co/400x260/1E293B/F8FAFC?text=Foto+Air+Sungai+Citarum+(Tanpa+GPS)',
-        hasExif: false
-      };
-      document.getElementById('chat-text-input').value = '';
-      sendUserMessage();
-    }
-
-    function simulateElderlyReport() {
-      initChat();
-      document.getElementById('chat-text-input').value = 'Air di bawah Jembatan Baleendah hitam pekat dan bau menyengat sejak subuh';
-      sendUserMessage();
-    }
-
-    // =========================================================================
-    // 5. PETA PUBLIK RADIUS 300M & PANTAU STATUS TIKET
-    // =========================================================================
-    function renderPublicMapAndList() {
-      const markerGroup = document.getElementById('map-verified-markers');
-      const listContainer = document.getElementById('public-verified-list');
-      if (!markerGroup || !listContainer) return;
-
-      markerGroup.innerHTML = '';
-      listContainer.innerHTML = '';
-
-      const verifiedCases = casesData.filter(c => c.status === 'Terverifikasi Jurnalistik');
-
-      verifiedCases.forEach(item => {
-        const meta = CATEGORY_META[item.kategori] || CATEGORY_META['Air Hitam / Merah'];
-
-        // Render lingkaran zona generalisasi ±300 meter di SVG
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.innerHTML = `
-          <circle cx="${item.mapX}" cy="${item.mapY}" r="52" fill="${meta.hex}" fill-opacity="0.28" stroke="#0F172A" stroke-width="3" stroke-dasharray="8 5" />
-          <circle cx="${item.mapX}" cy="${item.mapY}" r="20" fill="${meta.hex}" stroke="#0F172A" stroke-width="3" />
-          <text x="${item.mapX}" y="${item.mapY + 6}" text-anchor="middle" font-size="18" font-weight="bold" fill="#0F172A">${meta.symbol}</text>
-          <rect x="${item.mapX - 88}" y="${item.mapY + 26}" width="176" height="24" rx="6" fill="#0F172A" />
-          <text x="${item.mapX}" y="${item.mapY + 42}" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">Radius ±300m • ${escapeHtml(item.kategori)}</text>
-        `;
-        markerGroup.appendChild(g);
-
-        // Render kartu kasus terverifikasi di bawah peta
+      casesData.forEach(item => {
         const card = document.createElement('div');
-        card.className = 'card-accessible p-4 bg-white border-slate-900 flex flex-col justify-between gap-3';
+        card.className = 'card-accessible p-5 bg-white space-y-3';
         card.innerHTML = `
-          <div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <span class="px-3 py-1 rounded-lg font-extrabold text-xs sm:text-sm border-2 border-slate-900 ${meta.bg} ${meta.text}">
-                ${meta.symbol} ${escapeHtml(item.kategori)}
-              </span>
-              <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-slate-950 border-2 border-[#009E73] text-xs font-extrabold">
-                ✔ Terverifikasi Jurnalistik
-              </span>
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+            <div>
+              <span class="font-extrabold text-sm px-2.5 py-1 bg-slate-900 text-white rounded-lg">${escapeHtml(item.idKasus)}</span>
+              <span class="ml-2 font-bold text-slate-700 text-sm">Zona: ${escapeHtml(item.zona)}</span>
             </div>
-            <h4 class="font-extrabold text-base sm:text-lg text-slate-950">Zona: ${escapeHtml(item.zona)} (Radius ±300m)</h4>
-            <p class="text-xs sm:text-sm text-slate-700 font-bold mt-0.5">🕒 ${escapeHtml(item.waktu)} • ${item.jumlahLaporan} laporan warga tergabung</p>
-            <div class="mt-3 p-3 rounded-xl bg-slate-100 border border-slate-300 text-sm text-slate-900">
-              <p class="font-extrabold text-xs uppercase text-slate-700 mb-1">📌 Tindak Lanjut Jurnalis:</p>
-              <p>${escapeHtml(item.tindakLanjut)}</p>
-            </div>
+            <span class="px-3 py-1 rounded-lg font-bold text-xs bg-sky-100 text-slate-950 border border-slate-400">
+              Status Saat Ini: <strong>${escapeHtml(item.status)}</strong>
+            </span>
           </div>
-          <div class="pt-2 border-t border-slate-200 text-xs text-slate-700">
-            <strong>Kontributor Warga:</strong> ${escapeHtml(item.pelaporPublik.join(', '))}
+
+          <div>
+            <h3 class="font-extrabold text-base text-slate-950">${escapeHtml(item.kategori)} — ${escapeHtml(item.patokan)}</h3>
+            <p class="text-xs text-slate-600 mt-0.5">🕒 ${escapeHtml(item.waktu)} • <strong>${item.jumlahLaporan} laporan warga</strong> (Tiket: ${item.tiketTerkait.join(', ')})</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Tindak Lanjut Jurnalis:</label>
+            <textarea id="tindak-${item.idKasus}" rows="2" class="w-full p-2.5 rounded-lg border-2 border-slate-300 text-sm font-medium">${escapeHtml(item.tindakLanjut)}</textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t">
+            <div class="flex flex-wrap gap-2">
+              <button onclick="updateCaseStatus('${item.idKasus}', 'Terverifikasi Jurnalistik', document.getElementById('tindak-${item.idKasus}').value)" class="btn-accessible bg-[#009E73] text-white border-slate-950 text-xs">
+                ✔ Verifikasi (Tampil di Peta Publik)
+              </button>
+              <button onclick="updateCaseStatus('${item.idKasus}', 'Sedang Diverifikasi', document.getElementById('tindak-${item.idKasus}').value)" class="btn-accessible bg-[#D55E00] text-white border-slate-950 text-xs">
+                ▲ Proses Cek Lapangan
+              </button>
+              <button onclick="updateCaseStatus('${item.idKasus}', 'Ditolak', document.getElementById('tindak-${item.idKasus}').value)" class="btn-accessible bg-slate-200 text-slate-900 border-slate-500 text-xs">
+                ✖ Tolak / Tidak Valid
+              </button>
+            </div>
+            <span class="text-xs text-slate-500">Skor Prioritas: ${item.skorPrioritas}</span>
           </div>
         `;
-        listContainer.appendChild(card);
+        container.appendChild(card);
       });
     }
 
-    function searchTicketStatus() {
-      const code = document.getElementById('ticket-search-input').value.trim().toUpperCase();
-      const resultBox = document.getElementById('ticket-search-result');
-      if (!code) {
-        showToast('Masukkan Nomor Tiket', 'Ketik kode tiket laporan seperti SS-204 untuk mengecek status.');
-        return;
-      }
-
-      const foundCase = casesData.find(c => c.tiketTerkait.includes(code));
-      resultBox.classList.remove('hidden');
-
-      if (!foundCase) {
-        resultBox.innerHTML = `<p class="font-bold text-slate-950">Nomor tiket <strong>${escapeHtml(code)}</strong> belum ditemukan. Pastikan penulisan benar (contoh: SS-204).</p>`;
-        return;
-      }
-
-      const stMeta = STATUS_META[foundCase.status] || STATUS_META['Baru'];
-      resultBox.innerHTML = `
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-          <span class="font-extrabold text-base text-slate-950">Tiket ${escapeHtml(code)} → Tergabung dalam ${escapeHtml(foundCase.idKasus)}</span>
-          <span class="px-3 py-1 rounded-lg border-2 font-extrabold text-xs sm:text-sm ${stMeta.badgeClass}">
-            ${stMeta.symbol} Status: ${escapeHtml(foundCase.status)}
-          </span>
-        </div>
-        <p class="text-sm text-slate-800"><strong>Lokasi & Kategori:</strong> ${escapeHtml(foundCase.zona)} — ${escapeHtml(foundCase.kategori)} (${foundCase.jumlahLaporan} laporan warga)</p>
-        <p class="text-sm text-slate-900 mt-2 bg-white p-3 rounded-lg border border-slate-300"><strong>Catatan Tindak Lanjut:</strong> ${escapeHtml(foundCase.tindakLanjut)}</p>
-      `;
-    }
-
-    // =========================================================================
-    // 6. UTILITAS KEAMANAN XSS & SINKRONISASI ANTAR PLATFORM
-    // =========================================================================
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
@@ -1328,27 +255,17 @@
         .replace(/'/g, '&#039;');
     }
 
-    // Dengarkan perubahan real-time dari platform Meja Jurnalis (via BroadcastChannel & Storage)
-    if (syncChannel) {
-      syncChannel.onmessage = function(event) {
-        if (event.data && event.data.type === 'STATE_UPDATED') {
-          casesData = event.data.casesData || casesData;
-          renderPublicMapAndList();
-          showToast('Update Redaksi Jurnalis', 'Status verifikasi kasus baru saja diperbarui oleh tim jurnalis.');
-        }
-      };
+    function showToast(title, message) {
+      const banner = document.getElementById('toast-banner');
+      if (!banner) return;
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-message').textContent = message;
+      banner.classList.remove('hidden');
+      setTimeout(() => banner.classList.add('hidden'), 4000);
     }
 
-    window.addEventListener('storage', function(e) {
-      if (e.key === STORAGE_KEY_CASES || e.key === STORAGE_KEY_PATTERNS) {
-        syncFromBackend(false);
-      }
-    });
-
-    // Inisialisasi saat halaman dimuat
     window.onload = function() {
-      initChat();
-      syncFromBackend(false);
+      initJournalistCloud();
     };
   </script>
 </body>
